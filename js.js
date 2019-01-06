@@ -61,7 +61,6 @@ function generate(index) {
 
 function checkAnswer(e) {
     e.preventDefault();
-    console.log("test");
 
     if (document.getElementById("opt1").checked && jsonData[i].opt1 == jsonData[i].answer) {
        correctCount++;
@@ -79,17 +78,16 @@ function checkAnswer(e) {
   		const scoreResult = document.getElementById("scoreResult");
       scoreResult.innerHTML = `****Your score is: ${correctCount}*****`;
       scoreResult.classList.toggle("scoreResultShow");
+
         
     }
     // callback to generate
-    console.log(i);
     generate(i);
 }
 function saveName(){
 	
 		
-		var yourName = $("#yourName").val();
-		var result = $("#result").val();
+		var yourName = $("#yourName").val() || "unknown";
 		
 		saveIt = JSON.parse(localStorage.getItem('saveIt'));
 		    access.disabled = true;
@@ -99,8 +97,7 @@ function saveName(){
 		      
     
 		
-		newName = {yourName: yourName, result: result}
-		
+		newName = {yourName: yourName, result: correctCount}
 		
 		saveIt.push(newName);
 		
