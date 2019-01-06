@@ -1,69 +1,30 @@
-const formular = document.getElementById("formular");
+const
+    formular = document.getElementById("formular"),
+    nxtBtn = document.getElementById("nxtBtn");
 
-    /*	$(document).ready(function(){
-				
-		if (localStorage.saveIt) {
-			
-			refreshNames(); 
-      refreshTable();
-      
-			
-		} else { 
-			$("#list").text("no bands yet");
-			
-		}
-		
-	});
-    */
-    var nxtBtn = document.getElementById("nxtBtn");
+let
+    i = 0,
+    correctCount = 0;
 
-    nxtBtn.addEventListener("click", checkAnswer);
-	
-	
-	
-	//aktualizuj seznam jmen
-	function refreshNames(){
-		var namesAsText = ""
-		
-		$.each(JSON.parse(localStorage.getItem('saveIt')), function(m, val) {
-		  namesAsText = namesAsText + "name: "+val.yourName+", result: "+val.result+"<br>";
-		});
-		
-		//aktualizujeme seznam jmen
-		$("#list").html(namesAsText);		
-	}
+$(document).ready(() => {
+    localStorage.saveIt ?
+        refreshTable() :
+        document.getElementById('displayTable').style.display = 'none';
+});
+
+reset.onclick = () => location.reload();
 
 
-
-reset.onclick = function(){
-location.reload();
-     access.disabled = true;
-      calc.disabled = false;
-      yourName.disabled = false;
-     
-     scroll(300,300);
-     document.getElementById('displayTable').style.display = 'none';
- 
-}
-// json array movement variable
-    var i = 0;
-var correctCount = 0 ;
-
-//initialize the first question
-generate(i);
-// generate from json array data with index
-function generate(index) {
-    document.getElementById("question").innerHTML = jsonData[index].q;
-    document.getElementById("optt1").innerHTML = jsonData[index].opt1;
-    document.getElementById("optt2").innerHTML = jsonData[index].opt2;
-    document.getElementById("optt3").innerHTML = jsonData[index].opt3;
+calc.onclick = () => {
+    access.disabled = false;
+    calc.disabled = true;
+    yourName.disabled = true;
 }
 
-function checkAnswer(e) {
-    e.preventDefault();
+nxtBtn.onclick = () => {
 
     if (document.getElementById("opt1").checked && jsonData[i].opt1 == jsonData[i].answer) {
-       correctCount++;
+        correctCount++;
     }
     if (document.getElementById("opt2").checked && jsonData[i].opt2 == jsonData[i].answer) {
         correctCount++;
@@ -73,70 +34,67 @@ function checkAnswer(e) {
     }
     // increment i for next question
     i++;
-    if(jsonData.length-1 < i){
-        
-  		const scoreResult = document.getElementById("scoreResult");
-      scoreResult.innerHTML = `****Your score is: ${correctCount}*****`;
-      scoreResult.classList.toggle("scoreResultShow");
-      nxtBtn.classList.add("hiddenClass");
+    if (jsonData.length - 1 < i) {
 
-        
+        const scoreResult = document.getElementById("scoreResult");
+        scoreResult.innerHTML = `Your score is: ${correctCount}`;
+        scoreResult.classList.toggle("scoreResultShow");
+        nxtBtn.classList.add("hiddenClass");
+
+
     }
     // callback to generate
     generate(i);
 }
-function saveName(){
-	
-		
-		var yourName = $("#yourName").val() || "unknown";
-		
-		saveIt = JSON.parse(localStorage.getItem('saveIt'));
-		    access.disabled = true;
-		if (!saveIt){ 
-			saveIt = JSON.parse('[]');
-		}
-		      
-    
-		
-		newName = {yourName: yourName, result: correctCount}
-		
-		saveIt.push(newName);
-		
-		localStorage.setItem("saveIt", JSON.stringify(saveIt));
-		
-    
-	   document.getElementById('displayTable').style.display = 'table';
-		
-		refreshNames();
+
+//initialize the first question
+generate(i);
+// generate from json array data with index
+function generate(index) {
+    const questions = document.getElementsByClassName("questionForm");
+    [].forEach.call(questions, (element, i) => {
+        let currentJsonData = jsonData[index];
+        element.innerHTML = currentJsonData[Object.keys(currentJsonData)[i]];
+    });
+}
+
+function saveName() {
+
+    const yourName = $("#yourName").val() || "No name";
+
+    saveIt = JSON.parse(localStorage.getItem('saveIt')) || {};
+    access.disabled = true;
+
+    newName = {
+        yourName: yourName,
+        result: correctCount
+    }
+
+    saveIt.push(newName);
+
+    localStorage.setItem("saveIt", JSON.stringify(saveIt));
+
+    document.getElementById('displayTable').style.display = 'table';
+
     refreshTable();
-	}
-
-calc.onclick =function(){
-scoreResult.innerHTML = `Your score is: ${correctCount}`;
-      scoreResult.classList.toggle("scoreResultShow");
-access.disabled = false;
-     calc.disabled = true;
-      yourName.disabled = true;
-
 }
 
 function refreshTable() {
-    let table = document.getElementById("list");
+    let
+        table = document.getElementById("list"),
+        scores = JSON.parse(localStorage.saveIt);
+
     table.createTHead();
     table.innerHTML = "<th>Name</th><th>Score</th>";
-    let scores = JSON.parse(localStorage.saveIt);
-    let rowNumber = 1;
+
     for (let pomoc in scores) {
-        let row = table.insertRow(rowNumber);
-        let cell2 = row.insertCell(0);
-        let cell3 = row.insertCell(1);
+        let
+            row = table.insertRow(pomoc),
+            cell2 = row.insertCell(0),
+            cell3 = row.insertCell(1);
 
         cell2.innerText = scores[pomoc].yourName;
         cell3.innerHTML = scores[pomoc].result;
-
-        rowNumber++;
     }
-    
-}
 
-document.getElementById('displayTable').style.display = 'none';
+}
