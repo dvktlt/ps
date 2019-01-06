@@ -62,7 +62,7 @@ function saveName() {
 
     const yourName = $("#yourName").val() || "No name";
 
-    saveIt = JSON.parse(localStorage.getItem('saveIt')) || {};
+    saveIt = JSON.parse(localStorage.getItem('saveIt')) || [];
     access.disabled = true;
 
     newName = {
