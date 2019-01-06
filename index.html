@@ -1,83 +1,87 @@
 <!DOCTYPE html>
 <html lang="cs">
-<head>
-  <meta charset="utf-8">
-  <title>Quiz about the Czech Republic</title>
-    <link href="style.css" rel="stylesheet">
- 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="http://code.jquerygeo.com/jquery.geo-1.0.0-b3.min.js"></script>
-  <link rel="icon" href="ico.ico" type="image/x-icon">
-    
-  
-  </head>
-   
-  <body>
-   <div id="hlavni">
-      <div class="header white border">
-            <h1>List of the most asked questions about the Czech Republic</h1>
-       
-      </div>      
-      
-      <div class="obsah white ">
-          
-          	<h2>Choose the correct answer. Only one answer is correct.</h2>   <br>
-		
-	
-           
-  <form id="formular">
-  
-  
-  
-     
-    <input type="text" name="name" id = "yourName" placeholder="Please fill in your name">      
-</form>    
-                                                                           
-<div class="qPanel">
-   <div class="ques" id="question"> </div>
-             <div><input type="radio" id="opt1" name="options">
-                <span id="optt1"></span>
-            </div>
-            <div><input type="radio" id="opt2" name="options">
-                <span id="optt2"></span>
-            </div>
-            <div><input type="radio" id="opt3" name="options">
-                <span id="optt3"></span>
-            </div>
-          
-            <div class="lftCss">
-            <input id="nxtBtn" type="button" value="Next" />
-            </div>
-   </div>    
-        
-      
-  
-      
-   
-     <p>
-    <input type="button" id="calc" value="Send">
-    <input type="reset" value="Try again" id = "reset">
-      <input type="button" id = "access" onclick="saveName();" value="Save score" disabled>
- 
-  </p>
 
-      
-      <div id="scoreResult"></div>
-      
-		  <div id = "displayTable">
-		   
-		<h2>Results table</h2>
-		                   
-		<table id="list"> 
-   
-    </table>
-       </div>  
-      </div>
-      <div class="paticka white border">
-      
-      <div><p class = "copy">Vladimir Dvoryaninov &copy;<p></div>
-     </div>
-       </div>
-        <script src="data.js"></script>
-        <script  src="js.js">    </script>
-  </body>
+<head>
+    <meta charset="utf-8">
+    <title>Quiz about the Czech Republic</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquerygeo.com/jquery.geo-1.0.0-b3.min.js"></script>
+    <link rel="icon" href="ico.ico" type="image/x-icon">
+
+
+</head>
+
+<body>
+    <div id="hlavni">
+        <div class="header white border">
+            <h1>List of the most asked questions about the Czech Republic</h1>
+
+        </div>
+
+        <div class="obsah white ">
+
+            <h2>Choose the correct answer. Only one answer is correct.</h2> <br>
+
+
+
+            <form id="formular">
+
+
+
+
+                <input type="text" name="name" id="yourName" placeholder="Please fill in your name">
+            </form>
+
+            <div class="qPanel">
+                <div class="ques questionForm" id="question"> </div>
+                <div><input type="radio" id="opt1" name="options">
+                    <span id="optt1" class="questionForm"></span>
+                </div>
+                <div><input type="radio" id="opt2" name="options">
+                    <span id="optt2" class="questionForm"></span>
+                </div>
+                <div><input type="radio" id="opt3" name="options">
+                    <span id="optt3" class="questionForm"></span>
+                </div>
+
+                <div class="lftCss">
+                    <input id="nxtBtn" type="button" value="Next" />
+                </div>
+            </div>
+
+
+
+
+
+            <p>
+                <input type="button" id="calc" value="Send">
+                <input type="reset" value="Try again" id="reset">
+                <input type="button" id="access" onclick="saveName();" value="Save score" disabled>
+
+            </p>
+
+
+            <div id="scoreResult"></div>
+
+            <div id="displayTable">
+
+                <h2>Results table</h2>
+
+                <table id="list">
+
+                </table>
+            </div>
+        </div>
+        <div class="paticka white border">
+
+            <div>
+                <p class="copy">Vladimir Dvoryaninov &copy;<p>
+            </div>
+        </div>
+    </div>
+    <script src="data.js"></script>
+    <script src="js.js"> </script>
+</body>
+
 </html>
