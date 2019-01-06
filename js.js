@@ -39,7 +39,7 @@ nxtBtn.onclick = () => {
         const scoreResult = document.getElementById("scoreResult");
         scoreResult.innerHTML = `Your score is: ${correctCount}`;
         scoreResult.classList.toggle("scoreResultShow");
-        nxtBtn.classList.add("hiddenClass");
+        nxtBtn.value = "Finish";
 
 
     }
