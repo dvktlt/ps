@@ -51,11 +51,10 @@ nxtBtn.onclick = () => {
 generate(i);
 // generate from json array data with index
 function generate(index) {
-    const questions = document.getElementsByClassName("questionForm");
-    [].forEach.call(questions, (element, i) => {
-        let currentJsonData = jsonData[index];
-        element.innerHTML = currentJsonData[Object.keys(currentJsonData)[i]];
-    });
+    document.getElementById("question").innerHTML = jsonData[index].q;
+    document.getElementById("optt1").innerHTML = jsonData[index].opt1;
+    document.getElementById("optt2").innerHTML = jsonData[index].opt2;
+    document.getElementById("optt3").innerHTML = jsonData[index].opt3;
 }
 
 function saveName() {
